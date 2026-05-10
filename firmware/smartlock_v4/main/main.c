@@ -5,6 +5,16 @@
 #include "esp_log.h"
 #include "app_config.h"
 
+#if ENABLE_RAINMAKER
+#include "managers/cloud_manager.h"
+
+static void on_remote_cmd(bool unlock)
+{
+    // TODO: delegar a lock_manager cuando esté implementado
+    ESP_LOGI("MAIN", "Alexa/App solicita: %s", unlock ? "UNLOCK" : "LOCK");
+}
+#endif
+
 static const char *TAG = "SMARTLOCK";
 
 #ifdef HELTEC_V3
@@ -72,6 +82,10 @@ void app_main(void)
 
     ESP_LOGI(TAG, "SmartLock 4.0 -- F1 Validation");
     ESP_LOGI(TAG, "System ready. Waiting for peripherals...");
+
+#if ENABLE_RAINMAKER
+    ESP_ERROR_CHECK(cloud_manager_init(on_remote_cmd));
+#endif
 
     int tick = 0;
     while (1) {

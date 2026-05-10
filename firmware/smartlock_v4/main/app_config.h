@@ -96,6 +96,13 @@
 #define BUZZER_LONG_MS          500
 #define DEBOUNCE_MS             50
 
+// --- RainMaker ---
+#define RAINMAKER_NODE_NAME     "SmartLock 4.0"
+#define RAINMAKER_NODE_TYPE     "SmartLock"
+#define RAINMAKER_DEVICE_NAME   "SmartLock"
+// POP (Proof of Possession): se pide al provisionar por BLE en la app RainMaker
+#define RAINMAKER_PROV_POP      "smartlock4"
+
 // --- Feature Flags ---
 #define ENABLE_DEBUG_LOG        1
 #define ENABLE_NEXTION          0
