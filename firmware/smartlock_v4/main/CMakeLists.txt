@@ -9,6 +9,7 @@ idf_component_register(
         esp_event
         esp_netif
         wifi_provisioning
+        qrcode
         espressif__esp_rainmaker
 )
 target_compile_definitions(${COMPONENT_LIB} PRIVATE HELTEC_V3)

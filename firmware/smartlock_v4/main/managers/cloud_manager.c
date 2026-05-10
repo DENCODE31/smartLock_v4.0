@@ -16,6 +16,7 @@
 #include "esp_rmaker_schedule.h"
 #include "wifi_provisioning/manager.h"
 #include "wifi_provisioning/scheme_ble.h"
+#include "esp_qrcode.h"
 #include <string.h>
 #include <stdio.h>
 
@@ -111,7 +112,6 @@ static esp_err_t wifi_init_and_provision(void)
 
         ESP_LOGI(TAG, "Sin credenciales — BLE provisioning activo");
         ESP_LOGI(TAG, "Nombre BLE: %s  |  POP: %s", svc_name, RAINMAKER_PROV_POP);
-        ESP_LOGI(TAG, "Abre la app RainMaker > Add Device > escanea el QR o ingresa POP");
 
         ESP_ERROR_CHECK(wifi_prov_mgr_start_provisioning(
             WIFI_PROV_SECURITY_1,
@@ -119,6 +119,16 @@ static esp_err_t wifi_init_and_provision(void)
             svc_name,
             NULL
         ));
+
+        // Payload que la app RainMaker decodifica al escanear
+        char qr_payload[150];
+        snprintf(qr_payload, sizeof(qr_payload),
+            "{\"ver\":\"v1\",\"name\":\"%s\",\"pop\":\"%s\",\"transport\":\"ble\"}",
+            svc_name, RAINMAKER_PROV_POP);
+
+        ESP_LOGI(TAG, "Escanea este QR con la app RainMaker (Add Device):");
+        esp_qrcode_config_t qr_cfg = ESP_QRCODE_CONFIG_DEFAULT();
+        esp_qrcode_generate(&qr_cfg, qr_payload);
     } else {
         ESP_LOGI(TAG, "WiFi ya provisionado — conectando...");
         wifi_prov_mgr_deinit();
