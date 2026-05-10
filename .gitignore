@@ -1,0 +1,33 @@
+# ESP-IDF build output
+firmware/smartlock_v4/build/
+firmware/smartlock_v4/managed_components/
+firmware/smartlock_v4/dependencies.lock
+firmware/smartlock_v4/.cache/
+
+# sdkconfig (generado por idf.py, específico de cada máquina)
+firmware/smartlock_v4/sdkconfig.old
+
+# VS Code
+.vscode/
+
+# Altium Designer
+*.SchDocPreview
+*.PcbDocPreview
+*.BomDoc
+History/
+Project Logs for */
+__Previews/
+
+# Archivos temporales del sistema
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+
+# Logs
+*.log
