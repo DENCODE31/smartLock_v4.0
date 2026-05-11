@@ -109,6 +109,6 @@
 #define ENABLE_FINGERPRINT      0
 #define ENABLE_NFC              0
 #define ENABLE_FACE             0
-#define ENABLE_RAINMAKER        0
+#define ENABLE_RAINMAKER        1
 
 #endif
